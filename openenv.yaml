@@ -20,4 +20,4 @@ validation:
       kind: reward_channel
     declared_tools: [read, query, calculate, submit, finish]
   types:
-    tags: [mathematics, science, sql]
+    tags: [mathematics]

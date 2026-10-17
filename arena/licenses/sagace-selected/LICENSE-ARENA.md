@@ -1,4 +1,4 @@
-# Selected Arena artifact permission — STAGED FOR RELEASE REVIEW
+# Selected Arena artifact permission
 
 Copyright © 2026 Sagace. All rights reserved except as expressly granted below.
 
@@ -17,7 +17,7 @@ No ownership of the covered material is transferred. No permission to use Sagace
 
 ## Third-party material
 
-Third-party components and data retain their existing licenses and attribution requirements. Their own license terms govern those components, including any broader permissions. Preserve the supplied notices. Palmer Penguins observations are attributed under CC0; Wine Quality observations are attributed under CC BY 4.0 where included. Python packages and the pinned OpenEnv SDK retain their respective licenses.
+Third-party components and data retain their existing licenses and attribution requirements. Their own license terms govern those components, including any broader permissions. Preserve the supplied notices. Python packages and the pinned OpenEnv SDK retain their respective licenses.
 
 ## Warranty
 

@@ -6,8 +6,8 @@ from pathlib import Path
 
 
 def build_all_tasks():
-    from arena.families import math_bank, science_bank, sql_bank, wine_bank, baci_bank
-    tasks = math_bank.build_tasks()+science_bank.build_tasks()+sql_bank.build_tasks()+wine_bank.build_tasks()+baci_bank.build_tasks()
+    from arena.families import math_bank, science_bank, sql_bank, wine_bank, baci_bank, math_extension_bank, math_probability_v2_bank
+    tasks = math_bank.build_tasks()+science_bank.build_tasks()+sql_bank.build_tasks()+wine_bank.build_tasks()+baci_bank.build_tasks()+math_extension_bank.build_tasks()+math_probability_v2_bank.build_tasks()
     ids = [t['id'] for t in tasks]
     if len(ids) != len(set(ids)):
         raise RuntimeError('duplicate task IDs')
