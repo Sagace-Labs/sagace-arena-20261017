@@ -10,7 +10,7 @@
   "task_count": 4,
   "files": {
     ".dockerignore": "920495c2363db828c81caed7b6ae0e0ab25a79fcd0bfd4ebc881ead69bf36280",
-    ".github/workflows/publish.yml": "594ae90bbeb36328ad147dd339c2e294c5146a42b6ac416ff65710943e82c4a6",
+    ".github/workflows/publish.yml": "6ccd6238ba76418aed71bcd64e4f989523af5254652b91a706aa54a440e37d67",
     "arena/__init__.py": "96ab0bdf1676334f5b03e0293c56dc624296cffd3bfeedd78af31a3d841d1948",
     "arena/app.py": "2b726d76824bc7406bb3fe5982d3bcaee8cdd25d62a5a89d3be1257580d777d0",
     "arena/calculator.py": "5e56b1391cdda5ad80af62db452d39eec4e0a0e50d4118597da2b95efbd65d2a",
@@ -28,7 +28,7 @@
     "licenses/sagace-selected/LICENSE-ARENA.md": "af3f9c23b768ad6258d015fa463f572d488e0749d85fc877d15328163db8f56a",
     "NOTICE.md": "152573a105851ab0145b7db3e6a4e46da1ef66c28bf7dc2f8c773744cbbb6d0f",
     "openenv.yaml": "5437a312e0e2d08a381557525a2ff9a80c49ffc4837efd7edf48b69f7bcc99ce",
-    "README.md": "c157d386ce8b0f9ffe859163582d33e4ad2bf3cac50e5a126c476dbf22c4e238",
+    "README.md": "6668a580c49ce874991cde7d191242cbe9c92bc6b42379810ba2caaf892da1e9",
     "requirements.lock": "b3ebae2ee3d4cadc5f5572c0afd6b0cab6109c9cc3f99e2b863c2d42bf14f635",
     "tasks.jsonl": "b4f48d4bbebf08ae286a1f90e4885c48f35b6626c3a36603661e8f0fe0c92074"
   },
