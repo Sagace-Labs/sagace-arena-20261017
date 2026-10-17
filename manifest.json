@@ -10,7 +10,7 @@
   "task_count": 4,
   "files": {
     ".dockerignore": "920495c2363db828c81caed7b6ae0e0ab25a79fcd0bfd4ebc881ead69bf36280",
-    ".github/workflows/publish.yml": "6ccd6238ba76418aed71bcd64e4f989523af5254652b91a706aa54a440e37d67",
+    ".github/workflows/publish.yml": "fd56f8141e64d54b5171f545872b21529c1f3aa836a77c932084b4d8b88362ed",
     "arena/__init__.py": "96ab0bdf1676334f5b03e0293c56dc624296cffd3bfeedd78af31a3d841d1948",
     "arena/app.py": "2b726d76824bc7406bb3fe5982d3bcaee8cdd25d62a5a89d3be1257580d777d0",
     "arena/calculator.py": "5e56b1391cdda5ad80af62db452d39eec4e0a0e50d4118597da2b95efbd65d2a",

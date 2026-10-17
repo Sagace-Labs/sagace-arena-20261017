@@ -1,5 +1,8 @@
 name: Publish curated Arena image
 on:
+  push:
+    branches: [master]
+    paths: [.github/workflows/publish.yml]
   workflow_dispatch:
     inputs:
       tag:
@@ -11,6 +14,7 @@ permissions:
   packages: write
 jobs:
   publish:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
