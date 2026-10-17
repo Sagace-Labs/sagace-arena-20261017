@@ -1,0 +1,54 @@
+name: Export reviewed mathematical image
+on:
+  push:
+    branches: [master]
+    paths: [.github/workflows/export-reviewed-final4.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: read
+jobs:
+  export:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Login for reviewed package read
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      - name: Export exact reviewed final4 digest
+        env:
+          IMAGE: ghcr.io/sagace-labs/sagace-arena-20261017@sha256:825fc682fa75c3a686931574b5c84a5b6d55fe2311bbe052663c08f697a19c0b
+        run: |
+          set -euo pipefail
+          [[ "$IMAGE" == 'ghcr.io/sagace-labs/sagace-arena-20261017@sha256:825fc682fa75c3a686931574b5c84a5b6d55fe2311bbe052663c08f697a19c0b' ]]
+          docker pull "$IMAGE"
+          export IMAGE_ID=$(docker image inspect "$IMAGE" --format '{{.Id}}')
+          export REPO_DIGESTS=$(docker image inspect "$IMAGE" --format '{{json .RepoDigests}}')
+          export IMAGE_OS=$(docker image inspect "$IMAGE" --format '{{.Os}}')
+          export IMAGE_ARCH=$(docker image inspect "$IMAGE" --format '{{.Architecture}}')
+          export IMAGE_SIZE=$(docker image inspect "$IMAGE" --format '{{.Size}}')
+          docker tag "$IMAGE" sagace-math-final4-transfer:reviewed
+          docker save sagace-math-final4-transfer:reviewed | gzip -n > reviewed-image.tar.gz
+          sha256sum reviewed-image.tar.gz > reviewed-image.tar.gz.sha256
+          python - <<'PY'
+          import datetime,hashlib,json,os,re
+          assert re.fullmatch(r'sha256:[0-9a-f]{64}',os.environ['IMAGE_ID'])
+          digests=json.loads(os.environ['REPO_DIGESTS'])
+          assert os.environ['IMAGE'] in digests
+          assert os.environ['IMAGE_OS']=='linux' and os.environ['IMAGE_ARCH']=='amd64'
+          with open('reviewed-image.tar.gz','rb') as stream: sha=hashlib.file_digest(stream,'sha256').hexdigest()
+          receipt={'timestamp_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'registry_reference':os.environ['IMAGE'],'image_config_id':os.environ['IMAGE_ID'],'repo_digests':digests,'os':os.environ['IMAGE_OS'],'architecture':os.environ['IMAGE_ARCH'],'docker_reported_size_bytes':int(os.environ['IMAGE_SIZE']),'archive_sha256':sha,'workflow_run_id':os.environ['GITHUB_RUN_ID'],'environment_tests_executed':False,'public_visibility_verified':False}
+          with open('reviewed-image-receipt.json','w') as stream:json.dump(receipt,stream,indent=2)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reviewed-math-final4-image
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: error
+          path: |
+            reviewed-image.tar.gz
+            reviewed-image.tar.gz.sha256
+            reviewed-image-receipt.json
