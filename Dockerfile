@@ -10,7 +10,7 @@ COPY openenv.yaml /app/openenv.yaml
 COPY NOTICE.md /app/NOTICE.md
 COPY LICENSE-ARENA.md /app/LICENSE-ARENA.md
 COPY licenses /app/licenses
-RUN useradd --uid 10001 --create-home runner && chmod -R a-w /app
+RUN useradd --uid 10001 --create-home runner && chmod -R a+rX /app && chmod -R a-w /app
 USER 10001
 ENV PYTHONUNBUFFERED=1 ENABLE_WEB_INTERFACE=false SAGACE_REQUIRE_SELECTION=1
 EXPOSE 8000
