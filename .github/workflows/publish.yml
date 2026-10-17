@@ -1,0 +1,66 @@
+name: Publish curated Arena image
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Immutable reviewed release tag
+        required: true
+        type: string
+permissions:
+  contents: read
+  packages: write
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Validate curated context
+        run: |
+          test -f manifest.json
+          test -f requirements.lock
+          test -f arena/selected_tasks.json
+          test ! -e .state
+          test ! -e .ssh
+          python - <<'PY'
+          import hashlib,json,pathlib
+          manifest=json.load(open('manifest.json'))
+          assert manifest['calibration_only'] is False
+          actual={p.as_posix() for p in pathlib.Path('.').rglob('*') if p.is_file() and '.git' not in p.parts and p.as_posix()!='manifest.json'}
+          assert actual==set(manifest['files']), 'unexpected or missing release files'
+          for name,digest in manifest['files'].items():
+              path=pathlib.Path(name)
+              assert not path.is_absolute() and '..' not in path.parts
+              assert hashlib.sha256(path.read_bytes()).hexdigest()==digest,name
+          tasks=json.load(open('arena/selected_tasks.json'))
+          assert 1 <= len(tasks) <= 50
+          assert all(t['split']=='train' for t in tasks)
+          ids=[t['id'] for t in tasks]
+          assert len(set(ids))==len(ids)==manifest['task_count']
+          assert sorted(ids)==manifest['task_ids']
+          rows=[json.loads(line) for line in pathlib.Path('tasks.jsonl').read_text().splitlines()]
+          assert sorted(t['id'] for t in rows)==sorted(ids)
+          assert all(t['split']=='train' for t in rows)
+          PY
+      - name: Login to GHCR
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      - name: Build and push reviewed tag
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          [[ "$RELEASE_TAG" =~ ^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$ ]]
+          IMAGE=$(printf '%s' "$IMAGE" | tr '[:upper:]' '[:lower:]')
+          docker build --pull --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}" --label "org.opencontainers.image.revision=${{ github.sha }}" -t "$IMAGE:$RELEASE_TAG" .
+          docker push "$IMAGE:$RELEASE_TAG" | tee image-push-receipt.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: image-push-receipt
+          path: image-push-receipt.txt
+
+
+
+

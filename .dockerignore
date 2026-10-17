@@ -1,0 +1,6 @@
+.git
+.github
+.state
+.ssh
+reports
+*.tar.gz

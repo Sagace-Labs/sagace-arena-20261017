@@ -1,0 +1,41 @@
+{
+  "sdk_revision": "86a180ede21e044f7929b9a7783ad83aa67d83a3",
+  "calibration_only": false,
+  "task_ids": [
+    "math-allocation-02",
+    "math-boolean_constraints-00",
+    "math-conditional_probability-01",
+    "math-graph_walks-03"
+  ],
+  "task_count": 4,
+  "files": {
+    ".dockerignore": "920495c2363db828c81caed7b6ae0e0ab25a79fcd0bfd4ebc881ead69bf36280",
+    ".github/workflows/publish.yml": "594ae90bbeb36328ad147dd339c2e294c5146a42b6ac416ff65710943e82c4a6",
+    "arena/__init__.py": "96ab0bdf1676334f5b03e0293c56dc624296cffd3bfeedd78af31a3d841d1948",
+    "arena/app.py": "2b726d76824bc7406bb3fe5982d3bcaee8cdd25d62a5a89d3be1257580d777d0",
+    "arena/calculator.py": "5e56b1391cdda5ad80af62db452d39eec4e0a0e50d4118597da2b95efbd65d2a",
+    "arena/calculator_v2.py": "eead316902942a1dac5f9a6393cc9a57054c21465f3b560bfa02182c897360a5",
+    "arena/catalog.py": "c1ff37a42548ad985b3bf49da76493923f6fd91aed99dd298d18561f47640943",
+    "arena/environment.py": "b0677e49587252b4fc890d4b0a56e219f3ecde7eeb67f9b641cc68e6d5a2379b",
+    "arena/families/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "arena/families/math_bank.py": "22d162cf22002181160e6c5c965ee0337e5c1bb62ed5f3c8e4ada771080c0cec",
+    "arena/families/science_bank.py": "92b7d531be774e66f33109332dc4beb69bcbe744462222b0e5ca4282a9b4afd2",
+    "arena/families/sql_bank.py": "2ed19df9a9b7f6221cc4a597f05a0ae3937afdec9e9c2d5b6b47678757c70897",
+    "arena/licenses/sagace-selected/LICENSE-ARENA.md": "af3f9c23b768ad6258d015fa463f572d488e0749d85fc877d15328163db8f56a",
+    "arena/selected_tasks.json": "c2c9d5ec92b41c4a8fb9cb9559e31e156a46edb9ba8cf84a9e71b2ddff1d771b",
+    "Dockerfile": "495de00f4762768a72eb4623d15d7e1d6ff6e38c62b7d5d8138bd9d2c4d91be6",
+    "LICENSE-ARENA.md": "af3f9c23b768ad6258d015fa463f572d488e0749d85fc877d15328163db8f56a",
+    "licenses/sagace-selected/LICENSE-ARENA.md": "af3f9c23b768ad6258d015fa463f572d488e0749d85fc877d15328163db8f56a",
+    "NOTICE.md": "152573a105851ab0145b7db3e6a4e46da1ef66c28bf7dc2f8c773744cbbb6d0f",
+    "openenv.yaml": "5437a312e0e2d08a381557525a2ff9a80c49ffc4837efd7edf48b69f7bcc99ce",
+    "README.md": "c157d386ce8b0f9ffe859163582d33e4ad2bf3cac50e5a126c476dbf22c4e238",
+    "requirements.lock": "b3ebae2ee3d4cadc5f5572c0afd6b0cab6109c9cc3f99e2b863c2d42bf14f635",
+    "tasks.jsonl": "b4f48d4bbebf08ae286a1f90e4885c48f35b6626c3a36603661e8f0fe0c92074"
+  },
+  "producer_export_manifest_sha256": "6231fa9837f2f45cf2122838cb95d00de7709d1241c45e1b40a736628e2d17c9",
+  "selected_original_permission": {
+    "release_id": "sagace-arena-20261017",
+    "file": "LICENSE-ARENA.md",
+    "scope": "Selected original files only; OpenEnv Arena participation; upstream licenses unchanged"
+  }
+}
